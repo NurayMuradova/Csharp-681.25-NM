@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Product
+{
+        private string name;
+            private string category;
+                private double price;
+                    private DateTime expireDate;
+
+                        public Product(string name, string category, double price, DateTime expireDate)
+                            {
+                                        this.name = name;
+                                                this.category = category;
+                                                        this.price = price;
+                                                                this.expireDate = expireDate;
+                            }
+
+                                public string GetName() => name;
+                                    public void SetName(string name) => this.name = name;
+
+                                        public string GetCategory() => category;
+                                            public void SetCategory(string category) => this.category = category;
+
+                                                public double GetPrice() => price;
+                                                    public void SetPrice(double price) => this.price = price;
+
+                                                        public DateTime GetExpireDate() => expireDate;
+                                                            public void SetExpireDate(DateTime expireDate) => this.expireDate = expireDate;
+
+                                                                public void GetData()
+                                                                    {
+                                                                                Console.WriteLine($"Ad: {name}");
+                                                                                        Console.WriteLine($"Kateqoriya: {category}");
+                                                                                                Console.WriteLine($"Qiymet: {price}");
+                                                                                                        Console.WriteLine($"Son tarix: {expireDate.ToShortDateString()}");
+                                                                                                                Console.WriteLine("-------------------");
+                                                                    }
+
+                                                                        public bool IsExpired()
+                                                                            {
+                                                                                        return DateTime.Now > expireDate;
+                                                                            }
+}
+
+class Program
+{
+
+        static void Main(string[] args)
+            {
+                        Product p1 = new Product("Corek", "Qida mehsullari", 1.5, new DateTime(2026, 6, 1));
+                                Product p2 = new Product("Sut", "Qida mehsullari", 2.0, new DateTime(2026, 5, 10));
+                                        Product p3 = new Product("Telefon", "Elektronika", 1200, new DateTime(2028, 1, 1));
+                                                Product p4 = new Product("Pendir", "Qida mehsullari", 5.0, new DateTime(2024, 1, 1));
+
+                                                        List<Product> products = new List<Product> { p1, p2, p3, p4 };
+
+                                                                Console.WriteLine("Butun mehsullar:");
+                                                                        foreach (var item in products)
+                                                                                {
+                                                                                                item.GetData();
+                                                                                }
+
+                                                                                        Console.WriteLine("p1 varmi?");
+                                                                                                Console.WriteLine(products.Contains(p1));
+
+                                                                                                        Console.WriteLine("\nQida mehsullari:");
+                                                                                                                var qida = products.Where(x => x.GetCategory() == "Qida mehsullari").ToList();
+
+                                                                                                                        foreach (var item in qida)
+                                                                                                                                {
+                                                                                                                                                item.GetData();
+                                                                                                                                }
+
+                                                                                                                                        products.RemoveAll(x => x.IsExpired());
+
+                                                                                                                                                Console.WriteLine("Son tarix bitmeyen mehsullar:");
+                                                                                                                                                        foreach (var item in products)
+                                                                                                                                                                {
+                                                                                                                                                                                item.GetData();
+                                                                                                                                                                }
+            }
+}
+                                                                                                                                                                }
+                                                                                                                                }
+                                                                                }
+            }
+}
+                                                                            }
+                                                                    }
+                            }
+}
